@@ -1,0 +1,33 @@
+name: "Grow Timelapse Maker"
+version: "1.1.0"
+slug: "grow_timelapse_maker"
+description: "Annotates snapshots with sensor data and creates daily timelapse videos."
+arch:
+  - amd64
+  - armv7
+  - armhf
+  - aarch64
+startup: application
+boot: auto
+host_network: true
+init: false 
+map:
+  - config:rw
+options:
+  snapshot_path: "/config/www/grow_snapshots"
+  timelapse_output: "/config/www/grow_timelapse.mp4"
+  temperature_sensor: "sensor.growtemp_grow_temperature"
+  humidity_sensor: "sensor.growtemp_grow_humidity"
+  vpd_sensor: "sensor.vpd"
+  ppfd_sensor: "input_number.grow_light_ppfd"
+  ha_token: "YOUR_LONG_LIVED_ACCESS_TOKEN"
+  debug: false
+schema:
+  snapshot_path: str
+  timelapse_output: str
+  temperature_sensor: str
+  humidity_sensor: str
+  vpd_sensor: str
+  ppfd_sensor: str
+  ha_token: str
+  debug: bool
