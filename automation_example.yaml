@@ -1,0 +1,18 @@
+alias: Take Snapshot from Blink Camera
+description: Captures snapshot with timestamp into organized folders by date every 5 min.
+trigger:
+  - platform: time_pattern
+    minutes: "/5"
+action:
+  - service: blink.trigger_camera
+    target:
+      entity_id: camera.grow
+  - delay: "00:00:30"
+  - service: camera.snapshot
+    target:
+      entity_id: camera.grow
+    data:
+      filename: >-
+        /config/www/grow_snapshots/{{ now().strftime('%Y/%m/%d') }}/snapshot_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg
+mode: single
+max_exceeded: silent
